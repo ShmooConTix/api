@@ -35,7 +35,7 @@ export interface ApiState {
 // called BEFORE store is created
 initDB();
 
-export const apiState = createStore<ApiState>((set) => ({
+export const apiState = createStore<ApiState>(() => ({
   stats: fetchStats(),
   checkouts: getCheckouts(),
   clients: [],
