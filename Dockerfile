@@ -20,7 +20,10 @@ RUN cd /temp/prod && bun install --frozen-lockfile --production
 FROM base AS prerelease
 COPY --from=install /temp/dev/node_modules node_modules
 COPY . .
-COPY ./src /app/
+COPY ./src/index.ts /app/index.ts
+COPY ./src/db.ts /app/db.ts
+COPY ./src/types.ts /app/types.ts
+COPY ./src/routes /app/routes
 
 ENV NODE_ENV=production
 
@@ -32,5 +35,5 @@ COPY --from=prerelease /app/package.json .
 
 # run the app
 USER bun
-EXPOSE 3000/tcp
+EXPOSE 80/tcp
 ENTRYPOINT [ "bun", "run", "index.ts" ]
