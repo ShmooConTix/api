@@ -16,12 +16,10 @@ import {
   Configuration,
   UserState,
 } from "./types";
-import {
-  getAllConfig,
-  setConfig,
-} from "./routes/dashboard/setConfig";
+import { getAllConfig, setConfig } from "./routes/dashboard/setConfig";
 import cors from "@elysiajs/cors";
 import { getUsers } from "./routes/dashboard/getUsers";
+import { answerRoute } from "./routes/extension/answer";
 
 export interface ApiState {
   stats: Statistics;
@@ -68,6 +66,11 @@ const app = new Elysia()
       }),
     }
   )
+  .post("/acceptExtensionAnswer", ({ body }) => answerRoute(body), {
+    body: t.Object({
+      answer: t.String(),
+    }),
+  })
   .ws("/events", eventFunctions)
   .ws("/client", clientWSfunctions)
   .listen(80);

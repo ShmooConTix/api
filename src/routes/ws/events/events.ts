@@ -50,7 +50,9 @@ export const eventFunctions = {
   },
 };
 
-const sendRiddleAnswers = (riddleAnswer: string) => {
+export const sendRiddleAnswers = (riddleAnswer: string) => {
+    console.log(`🤔 Riddle Answer Received: ${riddleAnswer}`);
+
     broadcastClientMessage("riddleAnswer", riddleAnswer);
     apiState.setState(() => ({
       riddle: {
