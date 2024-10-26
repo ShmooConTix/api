@@ -21,6 +21,8 @@ import cors from "@elysiajs/cors";
 import { getUsers } from "./routes/dashboard/getUsers";
 import { answerRoute } from "./routes/extension/answer";
 
+export const DEV_MODE = true;
+
 export interface ApiState {
   stats: Statistics;
   checkouts: DBCheckout[];

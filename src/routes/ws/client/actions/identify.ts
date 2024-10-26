@@ -1,4 +1,4 @@
-import { apiState } from "../../../..";
+import { apiState, DEV_MODE } from "../../../..";
 import { db } from "../../../../db";
 import { User } from "../../../../types";
 import { clientConnections } from "../client";
@@ -13,7 +13,8 @@ export const identifyClient = (ws: any, message: ClientMessage) => {
   if (
     apiState
       .getState()
-      .clients.some((client) => client.client === clientCodename)
+      .clients.some((client) => client.client === clientCodename) &&
+    !DEV_MODE
   ) {
     console.log(
       `📡 Client ${clientName} (${clientCodename}) already identified (id: ${ws.id}), closing connection`
@@ -46,13 +47,11 @@ export const identifyClient = (ws: any, message: ClientMessage) => {
     .query(`SELECT * FROM config WHERE key = 'baseURL'`)
     .get() as { id: number; key: string; value: string };
 
-  // send config to client
   ws.send({
     type: "initalize",
     data: {
       baseURL: baseURL.value,
       users: users,
-      // proxies, webhooks, etc.
     },
   });
 
