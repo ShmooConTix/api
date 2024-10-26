@@ -47,10 +47,15 @@ export const identifyClient = (ws: any, message: ClientMessage) => {
     .query(`SELECT * FROM config WHERE key = 'baseURL'`)
     .get() as { id: number; key: string; value: string };
 
+  const landingURL = db
+    .query(`SELECT * FROM config WHERE key = 'landingURL'`)
+    .get() as { id: number; key: string; value: string };
+
   ws.send({
     type: "initalize",
     data: {
       baseURL: baseURL.value,
+      landingURL: landingURL.value,
       users: users,
     },
   });
