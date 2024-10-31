@@ -20,6 +20,7 @@ import { getAllConfig, setConfig } from "./routes/dashboard/setConfig";
 import cors from "@elysiajs/cors";
 import { getUsers } from "./routes/dashboard/getUsers";
 import { answerRoute } from "./routes/extension/answer";
+import { formLink } from "./routes/extension/formLink";
 
 export const DEV_MODE = true;
 
@@ -71,6 +72,11 @@ const app = new Elysia()
   .post("/acceptExtensionAnswer", ({ body }) => answerRoute(body), {
     body: t.Object({
       answer: t.String(),
+    }),
+  })
+  .post("/extensionLinkBody", ({ body }) => formLink(body), {
+    body: t.Object({
+      linkBody: t.String(),
     }),
   })
   .ws("/events", eventFunctions)
