@@ -6,6 +6,7 @@ export type Statistics = {
 
 export type Configuration = {
   baseURL: string;
+  landingURL: string;
   webhookURL: string;
 }
 

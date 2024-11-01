@@ -5,9 +5,11 @@ import { Configuration } from "../../types";
 export function getAllConfig(): Configuration {
   const baseURL = getConfig("baseURL")?.value || "";
   const webhookURL = getConfig("webhookURL")?.value || "";
+  const landingURL = getConfig("landingURL")?.value || "";
 
   return {
     baseURL,
+    landingURL,
     webhookURL,
   };
 }
