@@ -21,6 +21,7 @@ import cors from "@elysiajs/cors";
 import { getUsers } from "./routes/dashboard/getUsers";
 import { answerRoute } from "./routes/extension/answer";
 import { formLink } from "./routes/extension/formLink";
+import { solveRiddle } from "./routes/ai/solveRiddle";
 
 export const DEV_MODE = true;
 
@@ -81,6 +82,14 @@ const app = new Elysia()
   })
   .ws("/events", eventFunctions)
   .ws("/client", clientWSfunctions)
+  .post("/ai/solve", solveRiddle, {
+    body: t.Object({
+      riddle: t.String(),
+    }),
+    response: t.Object({
+      answer: t.String(),
+    }),
+  })
   .listen(80);
 
 console.log(

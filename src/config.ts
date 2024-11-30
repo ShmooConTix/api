@@ -1,0 +1,1 @@
+export const aiMode = true; // Automatically solve riddles
