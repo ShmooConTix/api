@@ -82,14 +82,14 @@ const app = new Elysia()
   })
   .ws("/events", eventFunctions)
   .ws("/client", clientWSfunctions)
-  //.post("/ai/solve", solveRiddle, {
-  //  body: t.Object({
-  //    riddle: t.String(),
-  //  }),
-  //  response: t.Object({
-  //    answer: t.String(),
-  //  }),
-  //})
+  .post("/ai/solve", solveRiddle, {
+    body: t.Object({
+      riddle: t.String(),
+    }),
+    response: t.Object({
+      answer: t.String(),
+    }),
+  })
   .listen(80);
 
 console.log(
